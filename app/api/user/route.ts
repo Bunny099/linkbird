@@ -11,12 +11,12 @@ export async function GET() {
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json()
-        const { email, name } = body;
-        if (!email || !name) {
+        const { email, password,name,image, } = body;
+        if (!email || !password || !name || !image) {
             return NextResponse.json({ message: "Please provide valif field!" }, { status: 203 })
         }
         const newUser = await db.insert(User).values({
-            name, email
+            name, email,password,image
         }).returning();
         return NextResponse.json(newUser, { status: 200 })
     } catch (err) {
