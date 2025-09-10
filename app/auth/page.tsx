@@ -10,9 +10,9 @@ import { useAuthStore } from "@/lib/store/useAuthStore"
 
 
 export default function AuthPage() {
- const {step,setStep,name,setName,email,setEmail,password,setPassword,reset} = useAuthStore()
+  const { step, setStep, name, setName, email, setEmail, password, setPassword, reset } = useAuthStore()
 
-  
+
   async function handleLoginGoogle() {
     await authClient.signIn.social({
       provider: "google",
@@ -35,15 +35,15 @@ export default function AuthPage() {
   return (
     <div className="min-h-screen w-full fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 ">
       {step === "choose" && (
-        <Card className="w-full max-w-md bg-gray-950 text-white shadow-lg rounded-2xl p-6">
+        <Card className="w-full max-w-md   shadow-lg rounded-2xl p-6">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-bold">Continue with an account</CardTitle>
-            <CardDescription className="text-gray-400">You must log in or register to continue.</CardDescription>
+            <CardDescription className="text-gray-800">You must log in or register to continue.</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col gap-4">
             <Button
               onClick={handleLoginGoogle}
-              className="bg-white text-black font-medium rounded-xl py-4 hover:bg-gray-200 hover:cursor-pointer"
+              className="bg-gray-200 text-black font-medium rounded-xl py-4 hover:bg-gray-100 hover:cursor-pointer"
             >
               Continue with Google
             </Button>
@@ -56,7 +56,7 @@ export default function AuthPage() {
           </CardContent>
           <CardFooter className="flex justify-center gap-3">
             <span>New User?</span>
-            <button onClick={() => setStep("register")} className="text-gray-100 hover:underline hover:cursor-pointer">
+            <button onClick={() => setStep("register")} className="text-blue-800 hover:underline hover:cursor-pointer">
               Create An account
             </button>
           </CardFooter>
@@ -64,19 +64,19 @@ export default function AuthPage() {
       )}
 
       {step === "login" && (
-        <Card className="w-full max-w-md bg-gray-950 text-white shadow-lg rounded-2xl p-6 py-12">
+        <Card className="w-full max-w-md   shadow-lg rounded-2xl p-6 py-12">
           <CardHeader>
             <div className="flex flex-col  gap-2">
               <div
-               
-                className="text-gray-400 flex items-center hover:cursor-pointer "
+
+                className="text-gray-700 flex items-center hover:cursor-pointer "
                 onClick={() => setStep("choose")}
               >
                 <ArrowLeft className="w-5 h-5" /> Back
               </div>
               <div>
                 <CardTitle className="text-2xl font-bold">Login with email</CardTitle>
-                <CardDescription className="text-gray-400">Login using your email address.</CardDescription>
+                <CardDescription className="text-gray-600">Login using your email address.</CardDescription>
               </div>
             </div>
           </CardHeader>
@@ -102,9 +102,9 @@ export default function AuthPage() {
               </Button>
             </form>
           </CardContent>
-          <CardFooter className="flex justify-center gap-1 md:gap-2 text-sm text-gray-400 border-t border-gray-200">
+          <CardFooter className="flex justify-center gap-1 md:gap-2 text-sm text-gray-800 border-t border-gray-200">
             <span>Don&apos;t have an account?</span>
-            <button onClick={() => setStep("register")} className="text-gray-200 hover:underline hover:cursor-pointer">
+            <button onClick={() => setStep("register")} className="text-blue-800  hover:underline hover:cursor-pointer">
               Create New
             </button>
           </CardFooter>
@@ -112,19 +112,19 @@ export default function AuthPage() {
       )}
 
       {step === "register" && (
-        <Card className="w-full max-w-md bg-gray-950 text-white shadow-lg rounded-2xl p-6 py-4">
+        <Card className="w-full max-w-md  shadow-lg rounded-2xl p-6 py-4">
           <CardHeader>
             <div className="flex  flex-col  gap-2">
               <div
-               
-                className="text-gray-400 flex items-center hover:cursor-pointer hover:text-white"
+
+                className="text-gray-700 flex items-center hover:cursor-pointer "
                 onClick={() => setStep("choose")}
               >
                 <ArrowLeft className="w-5 h-5" /> Back
               </div>
               <div>
                 <CardTitle className="text-2xl font-bold">Register with email</CardTitle>
-                <CardDescription className="text-gray-400">Register using your email address.</CardDescription>
+                <CardDescription className="text-gray-600">Register using your email address.</CardDescription>
               </div>
             </div>
           </CardHeader>
@@ -136,7 +136,7 @@ export default function AuthPage() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="Enter your Email"/>
+                <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="Enter your Email" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
@@ -149,14 +149,14 @@ export default function AuthPage() {
                   placeholder="Enter your Password"
                 />
               </div>
-              <Button type="submit" className="w-full bg-blue-700 hover:bg-blue-600 rounded-xl py-4">
+              <Button type="submit" className="w-full bg-blue-700 hover:bg-blue-600 rounded-xl py-4 hover:cursor-pointer">
                 Create my Account
               </Button>
             </form>
           </CardContent>
-          <CardFooter className="flex justify-center gap-2 text-sm text-gray-400 border-t border-gray-200">
+          <CardFooter className="flex justify-center gap-2 text-sm text-gray-800 border-t border-gray-200">
             <span>Already have an account?</span>
-            <button onClick={() => setStep("login")} className="text-gray-200 hover:underline hover:cursor-pointer">
+            <button onClick={() => setStep("login")} className="text-blue-800 hover:underline hover:cursor-pointer">
               Login
             </button>
           </CardFooter>
