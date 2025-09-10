@@ -28,7 +28,7 @@ export default function AuthPage() {
 
   async function handleEmailSignup(e: React.FormEvent) {
     e.preventDefault()
-    await authClient.signUp.email({ email, name, password, callbackURL: "/dashboard" })
+    await authClient.signUp.email({ email, name, password, callbackURL: "/auth" })
     reset()
   }
 
