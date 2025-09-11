@@ -6,14 +6,17 @@ export default function Footer() {
         <footer >
             <div className="flex flex-col md:flex-row justify-between px-6 pt-12 md:pt-22">
                  <div className="flex flex-col items-center md:items-start space-y-4">
-                <img src="/logo.svg" height={150} width={150} />
+                    <Link href={"/"}>
+                    <img src="/logo.svg" height={150} width={150} /></Link>
+                
                 <div className="text-lg text-gray-600 text-wrap text-center md:text-start">
                     <h1>Automate Your B2B LinkedIn Outreach</h1>
                     <h1>Made with ❤️ by Sales Leaders</h1>
                 </div>
                 <div>
                      <Button className=" bg-blue-700 hover:bg-blue-600 cursor-pointer mt-4">
-                    Get Started Now
+                  <Link href={"/auth"}>Get Started Now</Link>
+
                 </Button>
                 </div>
                
@@ -22,7 +25,7 @@ export default function Footer() {
             <div className="grid grid-cols-2 mt-8 md:mt-1 md:grid-cols-3 gap-12">
                 <div className="flex flex-col space-y-4">
                     <h1 className="text-xl font-semibold text-gray-700">Product</h1>
-                    <Link className="linktext" href="/auth/login">Login</Link>
+                    <Link className="linktext" href="/auth/">Login</Link>
                     <Link className="linktext" href="#">Features</Link>
                     <Link className="linktext" href="#">Pricing</Link>
                     <Link className="linktext" href="#">Affiliate</Link>
@@ -49,7 +52,7 @@ export default function Footer() {
 
 
             <div className="  border-t border-gray-300 shadow-md mt-8">
-                <p className="text-center text-gray-500 text-sm pt-4">LinkBird-LinkedIn automation tool for agencies, sales teams and GTM operators &#169; 2025</p>
+                <p className="text-center text-gray-500 text-sm pt-4">LinkBird-LinkedIn automation tool for agencies, sales teams and GTM operators &#169; {new Date().getFullYear()}</p>
             </div>
            
         </footer>
