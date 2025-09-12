@@ -13,7 +13,7 @@ export default function LogoutButton(){
             }
         })
     }
-    return <Button onClick={handleLogout}>
+    return <Button  className="bg-blue-700 hover:bg-blue-600 cursor-pointer" onClick={handleLogout}>
         Logout
     </Button>
 }

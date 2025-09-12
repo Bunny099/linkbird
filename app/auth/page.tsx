@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label"
 import { authClient } from "@/lib/auth-client"
 import { ArrowLeft } from "lucide-react"
 import { useAuthStore } from "@/lib/store/useAuthStore"
-
+import Link from "next/link"
 
 export default function AuthPage() {
   const { step, setStep, name, setName, email, setEmail, password, setPassword, reset } = useAuthStore()
@@ -37,13 +37,18 @@ export default function AuthPage() {
       {step === "choose" && (
         <Card className="w-full max-w-md   shadow-lg rounded-2xl p-6">
           <CardHeader className="text-center">
+
+            <div
+              className="text-gray-700 flex items-center hover:cursor-pointer">
+              <ArrowLeft className="w-5 h-5" /> <Link href="/">Back</Link>
+            </div>
             <CardTitle className="text-2xl font-bold">Continue with an account</CardTitle>
             <CardDescription className="text-gray-800">You must log in or register to continue.</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col gap-4">
             <Button
               onClick={handleLoginGoogle}
-              className="bg-gray-200 text-black font-medium rounded-xl py-4 hover:bg-gray-100 hover:cursor-pointer"
+              className="bg-gray-200 text-black font-medium rounded-xl py-4 hover:bg-gray-300 hover:cursor-pointer"
             >
               Continue with Google
             </Button>

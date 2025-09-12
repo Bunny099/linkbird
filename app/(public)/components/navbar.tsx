@@ -9,13 +9,13 @@ export default function Navbar() {
     return <div className="w-full flex justify-center sticky top-0 z-50 ">
         <nav className=" px-6 md:px-8 rounded-2xl shadow-md bg-white mt-6 py-3 flex items-center justify-between w-full max-w-6xl">
             <Link href={"/"}>
-                <img src="/logo.svg" alt="Logo" height={150} width={150} /></Link>
-
+                <img src="/fly.png" alt="Logo" height={150} width={150} />
+            </Link>
 
             <ul className="hidden md:flex gap-12 text-lg text-gray-600 ">
                 <Link href={"/"} className="hover:cursor-pointer hover:text-blue-700">Home</Link>
                 <Link href={"/"} className="hover:cursor-pointer hover:text-blue-700">Features</Link>
-                <Link href={"/"} className="hover:cursor-pointer hover:text-blue-700">Pricing</Link>
+
             </ul>
 
             <div className="hidden md:block">
@@ -33,13 +33,10 @@ export default function Navbar() {
                     <ul className="flex flex-col gap-4 text-lg text-gray-600">
                         <Link href={"/"} className="hover:cursor-pointer hover:text-blue-700">Home</Link>
                         <Link href={"/"} className="hover:cursor-pointer hover:text-blue-700">Features</Link>
-                        <Link href={"/"} className="hover:cursor-pointer hover:text-blue-700">Pricing</Link>
-
                     </ul>
                     <div className="mt-6 ">
                         <Button className="w-full bg-blue-700 hover:bg-blue-600 cursor-pointer">
                             <Link href="/auth">Get Started</Link>
-
                         </Button>
                     </div>
                 </div>
