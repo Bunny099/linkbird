@@ -1,53 +1,86 @@
 "use client"
-import { HousePlus, UserCheck, FlaskConical } from "lucide-react"
+
+import { HousePlus, UserCheck, FlaskConical, LogOut, ChevronLeft, ChevronRight } from "lucide-react"
 import LogoutButton from "./logoutBtn"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
+import clsx from "clsx"
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen = true, toggleAction }: { isOpen?: boolean; toggleAction?: () => void }) {
+  const pathname = usePathname()
+
+  const navItems = [
+    { href: "/dashboard", label: "Dashboard", icon: HousePlus },
+    { href: "/dashboard/optimizer", label: "Profile", icon: UserCheck },
+    { href: "/dashboard/post", label: "Post", icon: FlaskConical },
+  ]
+
   return (
-    <div className="w-60 min-h-screen m-2 rounded-xl shadow-xl bg-white flex flex-col">
-     
-      <div className="flex items-center justify-center py-6 border-b border-gray-200">
-        <img src="/fly.png" width={100} height={100} alt="logo" />
+    <div
+      className={clsx(
+        "min-h-screen  rounded-2xl bg-white/80 backdrop-blur-md shadow-xl border border-gray-100 flex flex-col transition-all duration-300",
+        isOpen ? "w-64" : "w-20"
+      )}
+    >
+
+      <div className="flex items-center justify-between py-6 px-4 border-b border-gray-100">
+        <img
+          src="/fly.png"
+          width={isOpen ? 80 : 40}
+          height={80}
+          alt="logo"
+          className="drop-shadow-sm transition-all"
+        />
+        {toggleAction && (
+          <button
+            onClick={toggleAction}
+            className="p-1 rounded-md hover:bg-gray-100 transition"
+          >
+            {isOpen ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+          </button>
+        )}
       </div>
 
-     
-      <div className="flex flex-col px-4 py-6 space-y-2">
-        <p className="text-xs uppercase tracking-wide text-gray-500 font-semibold mb-2">
-          Overview
+
+      <div className="flex flex-col px-3 py-6 space-y-2 flex-1">
+        <p
+          className={clsx(
+            "uppercase tracking-wide text-gray-400 font-semibold mb-2 text-xs transition-all",
+            !isOpen && "opacity-0 hidden"
+          )}
+        >
+          Menu
         </p>
 
-        <Link
-          href="/dashboard"
-          className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition"
-        >
-          <HousePlus className="h-5 w-5" />
-          Dashboard
-        </Link>
-
-        <Link
-          href="/dashboard/optimizer"
-          className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition"
-        >
-          <UserCheck className="h-5 w-5" />
-          Profile
-        </Link>
-
-        <Link
-          href="/dashboard/post"
-          className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition"
-        >
-          <FlaskConical className="h-5 w-5" />
-          Post
-        </Link>
+        {navItems.map(({ href, label, icon: Icon }) => {
+          const active = pathname === href
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={clsx(
+                "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all",
+                active
+                  ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-sm"
+                  : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+              )}
+            >
+              <Icon className="h-5 w-5 shrink-0" />
+              {isOpen && <span>{label}</span>}
+            </Link>
+          )
+        })}
       </div>
 
-    
-      <div className="flex-1" />
 
-     
-      <div className="border-t border-gray-200 p-4">
-        <LogoutButton />
+      <div className="border-t border-gray-100 p-3">
+        <button
+          onClick={() => LogoutButton()}
+          className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-red-600 hover:bg-red-50 w-full px-3 py-2 rounded-lg transition"
+        >
+          <LogOut className="h-5 w-5" />
+          {isOpen && <span>Logout</span>}
+        </button>
       </div>
     </div>
   )
