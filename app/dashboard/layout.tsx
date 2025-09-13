@@ -1,29 +1,43 @@
 "use client"
+
 import { useState } from "react"
-import LogoutButton from "./components/logoutBtn"
 import Sidebar from "./components/sidebar"
-import { Columns2 } from "lucide-react"
+import { Menu } from "lucide-react"
+
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false)
 
-  return (
-    <div className="min-h-screen w-full flex">
-     
-      {isOpen && <Sidebar />}
+  return (<div className="min-h-screen w-full flex bg-gray-50">
 
-      <main className="flex-1 flex flex-col">
-       
-        <div className="p-2">
-          <Columns2
-            onClick={() => setIsOpen(!isOpen)}
-            className="h-6 w-6 text-gray-500 cursor-pointer hover:text-gray-700 transition"
-          />
-        </div>
-
-      
-        <div className="p-4">{children}</div>
-      </main>
+    <div className="hidden md:flex">
+      <Sidebar isOpen={isOpen} toggleAction={() => setIsOpen(!isOpen)} />
     </div>
+    {mobileOpen && (
+      <div className="fixed inset-0 z-50 flex">
+        <div className="w-64">
+          <Sidebar isOpen={true} toggleAction={() => setMobileOpen(false)} />
+        </div>
+        <div className="bg-black/40 flex-1"
+          onClick={() => setMobileOpen(false)} >
+        </div>
+      </div>
+    )}
+
+    <main className="flex-1 flex flex-col">
+      <div className="p-3 flex items-center">
+        <Menu
+          className="h-6 w-6 text-gray-600 cursor-pointer hover:text-gray-900 transition"
+          onClick={() => {
+            if (window.innerWidth < 768) setMobileOpen(true)
+            else setIsOpen(!isOpen)
+          }}
+        />
+      </div>
+      <div className="p-4">{children}</div>
+    </main>
+  </div>
+
   )
 }
