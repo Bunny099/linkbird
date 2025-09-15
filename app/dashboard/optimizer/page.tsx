@@ -71,7 +71,13 @@ export default function ProfileOptimizerPage() {
 
       <div className="flex-1 overflow-y-auto p-6 space-y-10">
 
-        <form onSubmit={linkedInOptimizeFun} className="space-y-6">
+        <motion.form 
+        
+        onSubmit={linkedInOptimizeFun} 
+         initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+        className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-1  items-center gap-2">
               <FileText className="w-4 h-4 text-blue-600" /> Headline
@@ -121,7 +127,7 @@ export default function ProfileOptimizerPage() {
               {loading ? "Optimizing..." : "Optimize Profile "}
             </Button>
           </div>
-        </form>
+        </motion.form>
 
         {suggestion && (
           <motion.div
@@ -138,10 +144,10 @@ export default function ProfileOptimizerPage() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute top-2 right-2"
+                  className="absolute top-2 right-2 hover:bg-blue-50 rounded-full"
                   onClick={() => copyToClipboard(suggestion.suggestedHeading, "Headline")}
                 >
-                  <Copy className="w-4 h-4" />
+                  <Copy className="w-4 h-4 text-gray-600" />
                 </Button>
                 {copied === "Headline" && (
                   <span className="text-xs text-green-600">Copied!</span>
@@ -154,10 +160,10 @@ export default function ProfileOptimizerPage() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute top-2 right-2"
+                  className="absolute top-2 right-2 hover:bg-blue-50 rounded-full"
                   onClick={() => copyToClipboard(suggestion.suggestedAboutme, "About")}
                 >
-                  <Copy className="w-4 h-4" />
+                  <Copy className="w-4 h-4 text-gray-600" />
                 </Button>
                 {copied === "About" && (
                   <span className="text-xs text-green-600">Copied!</span>
@@ -170,10 +176,10 @@ export default function ProfileOptimizerPage() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute top-2 right-2"
+                  className="absolute top-2 right-2 hover:bg-blue-50 rounded-full "
                   onClick={() => copyToClipboard(suggestion.suggestedExperience, "Experience")}
                 >
-                  <Copy className="w-4 h-4" />
+                  <Copy className="w-4 h-4 text-gray-600" />
                 </Button>
                 {copied === "Experience" && (
                   <span className="text-xs text-green-600">Copied</span>
@@ -206,7 +212,7 @@ export default function ProfileOptimizerPage() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="absolute top-2 right-2"
+                    className="absolute top-2 right-2 hover:bg-blue-50 rounded-full"
                     onClick={() =>
                       copyToClipboard(
                         `${h.suggestedHeading}\n\n${h.suggestedAboutme}\n\n${h.suggestedExperience}`,
@@ -214,7 +220,7 @@ export default function ProfileOptimizerPage() {
                       )
                     }
                   >
-                    <Copy className="w-4 h-4" />
+                    <Copy className="w-4 h-4 text-gray-600" />
                   </Button>
                   {copied === `History ${i + 1}` && (
                     <span className="absolute bottom-2 right-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full shadow-sm">
