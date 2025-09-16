@@ -74,13 +74,11 @@ export default function Sidebar({ isOpen = true, toggleAction }: { isOpen?: bool
 
 
       <div className="border-t border-gray-100 p-3">
-        <button
-          onClick={() => LogoutButton()}
-          className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-red-600 hover:bg-red-50 w-full px-3 py-2 rounded-lg transition"
-        >
+        <LogoutButton className="flex items-center gap-2 bg-red-50 text-sm font-medium text-red-600 hover:bg-red-100 w-full px-3 py-2 cursor-pointer rounded-lg transition">
           <LogOut className="h-5 w-5" />
           {isOpen && <span>Logout</span>}
-        </button>
+        </LogoutButton>
+
       </div>
     </div>
   )
