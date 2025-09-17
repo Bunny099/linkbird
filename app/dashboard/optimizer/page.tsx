@@ -5,6 +5,7 @@ import axios from "axios"
 import { Button } from "@/components/ui/button"
 import { Sparkles, FileText, Briefcase, History, Copy } from "lucide-react"
 import { motion } from "framer-motion"
+import LoadingDots from "../components/LoadingDot"
 
 type Suggestion = {
   suggestedHeading: string
@@ -13,18 +14,19 @@ type Suggestion = {
 }
 
 export default function ProfileOptimizerPage() {
-  const [heading, setHeading] = useState("")
-  const [aboutMe, setAboutMe] = useState("")
-  const [experience, setExperience] = useState("")
+  const [heading, setHeading] = useState<string>("")
+  const [aboutMe, setAboutMe] = useState<string>("")
+  const [experience, setExperience] = useState<string>("")
   const [suggestion, setSuggestion] = useState<Suggestion | null>(null)
   const [history, setHistory] = useState<Suggestion[]>([])
-  const [loading, setLoading] = useState(false)
+  const [optimizing,setOptimizing] = useState(false);
+  const [fetchingHistory,setFetchingHistory] = useState(false)
   const [showHistory, setShowHistory] = useState(false)
   const [copied, setCopied] = useState<string | null>(null)
 
   async function linkedInOptimizeFun(e: React.FormEvent) {
     e.preventDefault()
-    setLoading(true)
+    setOptimizing(true)
     try {
       const res = await axios.post("/api/optimizer", {
         heading,
@@ -35,17 +37,20 @@ export default function ProfileOptimizerPage() {
     } catch (err) {
       console.error(err)
     } finally {
-      setLoading(false)
+      setOptimizing(false)
     }
   }
 
   async function fetchHistory() {
+    setFetchingHistory(true)
     try {
       const res = await axios.get("/api/optimizer")
       setHistory(res.data.slice(0, 3))
       setShowHistory(true)
     } catch (err) {
       console.error("Error fetching history", err)
+    }finally{
+      setFetchingHistory(false)
     }
   }
 
@@ -63,8 +68,8 @@ export default function ProfileOptimizerPage() {
           <Sparkles className="w-6 h-6 text-blue-600" />
           <h1 className="text-xl font-bold text-gray-900">Profile Optimizer</h1>
         </div>
-        <Button onClick={fetchHistory} size="sm" variant="outline" className="flex items-center gap-2 cursor-pointer bg-blue-600 text-white hover:bg-blue-500 hover:text-white">
-          <History className="w-4 h-4" /> Get Last 3
+        <Button disabled={fetchingHistory} onClick={fetchHistory} size="sm" variant="outline" className="flex items-center gap-2 cursor-pointer bg-blue-600 text-white hover:bg-blue-500 hover:text-white">
+          <History className="w-4 h-4" /> {fetchingHistory ? "Getting...":"Get Last 3"}
         </Button>
       </div>
 
@@ -87,6 +92,7 @@ export default function ProfileOptimizerPage() {
               onChange={(e) => setHeading(e.target.value)}
               placeholder="Enter  headline..."
               rows={3}
+               required
               className="w-full p-3 rounded-xl border border-gray-200 bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
             />
           </div>
@@ -100,6 +106,7 @@ export default function ProfileOptimizerPage() {
               onChange={(e) => setAboutMe(e.target.value)}
               placeholder="Enter about you..."
               rows={4}
+               required
               className="w-full p-3 rounded-xl border border-gray-200 bg-white shadow-sm focus:ring-2 focus:ring-purple-500 focus:outline-none"
             />
           </div>
@@ -113,6 +120,7 @@ export default function ProfileOptimizerPage() {
               onChange={(e) => setExperience(e.target.value)}
               placeholder="Add your professional experience..."
               rows={5}
+               required
               className="w-full p-3 rounded-xl border border-gray-200 bg-white shadow-sm focus:ring-2 focus:ring-green-500 focus:outline-none"
             />
           </div>
@@ -120,14 +128,16 @@ export default function ProfileOptimizerPage() {
 
           <div className="flex justify-end">
             <Button
-              disabled={loading}
+              disabled={optimizing}
               type="submit"
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 text-white px-8 py-3 rounded-xl shadow-lg"
             >
-              {loading ? "Optimizing..." : "Optimize Profile "}
+              {optimizing ? "Optimizing..." : "Optimize Profile "}
             </Button>
           </div>
         </motion.form>
+
+        {optimizing && <LoadingDots/>}
 
         {suggestion && (
           <motion.div
@@ -189,7 +199,7 @@ export default function ProfileOptimizerPage() {
           </motion.div>
         )}
 
-
+        {fetchingHistory && <LoadingDots/>}
         {showHistory && history.length > 0 && (
           <div className="mt-12">
             <h2 className="text-xl font-bold text-gray-900 mb-6"> Recent Optimizations</h2>
