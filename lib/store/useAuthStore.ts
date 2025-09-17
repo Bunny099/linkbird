@@ -8,10 +8,12 @@ interface AuthState{
     name:string,
     email:string,
     password:string,
+    loading:boolean,
     setStep:(step:Step) => void,
     setName:(name:string)=>void,
     setEmail:(email:string) => void,
     setPassword:(password:string)=>void,
+    setLoading:(loading:boolean)=>void,
     reset:()=>void
 }
 export const useAuthStore = create<AuthState>((set)=>({
@@ -19,9 +21,11 @@ export const useAuthStore = create<AuthState>((set)=>({
     name:"",
     email:"",
     password:"",
+    loading:false, 
     setStep:(step)=>set({step}),
     setName:(name)=>set({name}),
     setEmail:(email)=>set({email}),
     setPassword: (password)=>set({password}),
-    reset:()=>set({step: "choose" as Step, name:"", email:"", password:""})
+    setLoading:(loading)=>set({loading}),
+    reset:()=>set({step: "choose" as Step, name:"", email:"", password:"",loading:false})
 }))
