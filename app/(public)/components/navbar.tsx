@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { X, Menu } from "lucide-react"
 import Link from "next/link";
+
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
@@ -14,7 +15,8 @@ export default function Navbar() {
 
             <ul className="hidden md:flex gap-12 text-lg text-gray-600 ">
                 <Link href={"/"} className="hover:cursor-pointer hover:text-blue-700">Home</Link>
-                <Link href={"/"} className="hover:cursor-pointer hover:text-blue-700">Features</Link>
+                <Link href={"#features"} className="hover:cursor-pointer hover:text-blue-700">Features</Link>
+                <Link href={"#faq"} className="hover:cursor-pointer hover:text-blue-700">FAQ</Link>
 
             </ul>
 
@@ -22,6 +24,7 @@ export default function Navbar() {
                 <Button className="bg-blue-700 hover:bg-blue-600 cursor-pointer">
                     <Link href={"/auth"}>Get Started</Link>
                 </Button>
+             
             </div>
 
             <button className="md:hidden text-gray-800" onClick={() => setIsOpen(!isOpen)}>
@@ -32,7 +35,8 @@ export default function Navbar() {
                 <div className="absolute top-25 left-1 w-full bg-white shadow-md rounded-xl px-6 mr-4 py-4 md:hidden z-40">
                     <ul className="flex flex-col gap-4 text-lg text-gray-600">
                         <Link href={"/"} className="hover:cursor-pointer hover:text-blue-700">Home</Link>
-                        <Link href={"/"} className="hover:cursor-pointer hover:text-blue-700">Features</Link>
+                <Link href={"#features"} className="hover:cursor-pointer hover:text-blue-700">Features</Link>
+                <Link href={"#faq"} className="hover:cursor-pointer hover:text-blue-700">FAQ</Link>
                     </ul>
                     <div className="mt-6 ">
                         <Button className="w-full bg-blue-700 hover:bg-blue-600 cursor-pointer">

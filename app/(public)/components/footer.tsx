@@ -14,7 +14,7 @@ export default function Footer() {
             <p className="text-gray-600 text-base leading-relaxed">
               Optimize your LinkedIn profile for <br />
               maximum reach. Built to help professionals <br />
-              grow their network 🚀
+              grow their network.
             </p>
 
             <Button className="bg-blue-700 hover:bg-blue-600 cursor-pointer mt-2">
@@ -26,15 +26,15 @@ export default function Footer() {
           <div className="flex flex-col space-y-3 text-left">
             <h2 className="text-lg font-semibold text-gray-700">Quick Links</h2>
             <Link className="text-gray-600 hover:text-blue-700 transition-colors" href="/auth/">Login</Link>
-            <Link className="text-gray-600 hover:text-blue-700 transition-colors" href="/">Features</Link>
-            <Link className="text-gray-600 hover:text-blue-700 transition-colors" href="/">About</Link>
+            <Link className="text-gray-600 hover:text-blue-700 transition-colors" href="#features">Features</Link>
+            <Link className="text-gray-600 hover:text-blue-700 transition-colors" href="#faq">FAQ</Link>
           </div>
         </div>
 
        
         <div className="border-t border-gray-200 mt-10 pt-6">
           <p className="text-center text-gray-500 text-sm">
-            © {new Date().getFullYear()} LinkFly - LinkedIn optimization tool for professionals and businesses
+            © {new Date().getFullYear()} LinkFly - LinkedIn optimization tool for professionals and businesses.
           </p>
         </div>
       </footer>
