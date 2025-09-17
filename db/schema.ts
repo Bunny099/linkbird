@@ -1,5 +1,5 @@
 
-import { pgTable, text, timestamp, boolean,uuid } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean,uuid, jsonb } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -79,5 +79,15 @@ export const profile_analysis = pgTable("profile_analysis",{
 })
 
 
+export const post_generator = pgTable("post_generator",{
+  id:uuid("id").primaryKey().defaultRandom(),
+  userId: text("userId").notNull().references(()=>user.id,{onDelete:"cascade"}),
+  topic: text("text").notNull(),
+  tone: text("tone"),
+  count: text("count"),
+  generatedPosts: jsonb("generatedPosts").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull()
 
-export const schema = { user, session, account, verification };
+})
+
+export const schema = { user, session, account, verification , profile_analysis,post_generator};
