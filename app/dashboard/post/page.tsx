@@ -13,6 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import LoadingDots from "../components/LoadingDot";
 
 type GeneratedPosts = {
   postText: string;
@@ -182,6 +183,7 @@ export default function PostPage() {
             </Button>
           </div>
         </motion.form>
+        {loading && <LoadingDots/>}
 
        
         {posts && (
@@ -237,6 +239,7 @@ export default function PostPage() {
           </motion.div>
         )}
 
+       {fetchingPostHistory && <LoadingDots/>}
        
         {postHistory && (
           <motion.div
